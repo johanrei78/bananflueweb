@@ -67,6 +67,190 @@ function lagPForelder(ant, oye, kropp, vinge, kjonn) {
     };
 }
 
+// ---------------------------------------------------------
+// GENETIKK: GAMETER OG KRYSS
+// ---------------------------------------------------------
+
+function tilfeldigFra(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+
+function lagGamet(individ) {
+
+    // -----------------------------------------------------
+    // Antenner (A/a)
+    // -----------------------------------------------------
+
+    const antAllel =
+        tilfeldigFra(individ.antenner);
+
+
+    // -----------------------------------------------------
+    // Koblede gener: kroppsfarge og vinger
+    // 20 % rekombinasjon
+    // -----------------------------------------------------
+
+    const h1 = individ.haplotyper[0];
+    const h2 = individ.haplotyper[1];
+
+    let haplotype;
+
+    if (Math.random() < 0.2) {
+
+        // Del haplotypene i kroppsfarge og vingeallel.
+        const deler1 = h1.split("-");
+        const deler2 = h2.split("-");
+
+        if (Math.random() < 0.5) {
+
+            haplotype =
+                `${deler1[0]}-${deler2[1]}`;
+
+        } else {
+
+            haplotype =
+                `${deler2[0]}-${deler1[1]}`;
+        }
+
+    } else {
+
+        haplotype =
+            tilfeldigFra([h1, h2]);
+    }
+
+
+    // -----------------------------------------------------
+    // X-bundet øyefarge
+    // -----------------------------------------------------
+
+    if (individ.kjonn === "Hann") {
+
+        // Hannen lager omtrent 50 % X-gameter
+        // og 50 % Y-gameter.
+
+        if (Math.random() < 0.5) {
+
+            return {
+                ant: antAllel,
+                haplotype: haplotype,
+                X: individ.oyefargeX[0]
+            };
+
+        } else {
+
+            return {
+                ant: antAllel,
+                haplotype: haplotype,
+                Y: true
+            };
+        }
+
+    } else {
+
+        // Hunnen gir alltid et X-kromosom.
+        // Ett av hennes to X-alleler velges tilfeldig.
+
+        return {
+            ant: antAllel,
+            haplotype: haplotype,
+            X: tilfeldigFra(individ.oyefargeX)
+        };
+    }
+}
+
+
+function kryss(parent1, parent2, baseN = 1000) {
+
+    // Samme variasjon som i Python-versjonen:
+    // omtrent 1000 avkom, ±50.
+
+    const n =
+        baseN +
+        Math.floor(Math.random() * 101) -
+        50;
+
+    const avkom = [];
+
+
+    for (let i = 0; i < n; i++) {
+
+        const g1 = lagGamet(parent1);
+        const g2 = lagGamet(parent2);
+
+
+        // -------------------------------------------------
+        // Antenner
+        // -------------------------------------------------
+
+        const antenner = [g1.ant, g2.ant];
+
+        // AA er letal.
+        // Disse individene regnes derfor ikke blant
+        // de levende avkommene.
+
+        if (
+            antenner[0] === "A" &&
+            antenner[1] === "A"
+        ) {
+            continue;
+        }
+
+
+        // -------------------------------------------------
+        // Kroppsfarge og vinger
+        // -------------------------------------------------
+
+        const haplotyper = [
+            g1.haplotype,
+            g2.haplotype
+        ];
+
+
+        // -------------------------------------------------
+        // Kjønn og X-bundet øyefarge
+        // -------------------------------------------------
+
+        let kjonn;
+        let oyefargeX;
+
+        if (g1.Y || g2.Y) {
+
+            kjonn = "Hann";
+
+            // X-kromosomet kommer fra gameten
+            // som ikke inneholder Y.
+
+            const xAllel =
+                g2.Y ? g1.X : g2.X;
+
+            oyefargeX = [xAllel];
+
+        } else {
+
+            kjonn = "Hunn";
+
+            oyefargeX = [
+                g1.X,
+                g2.X
+            ];
+        }
+
+
+        const individ = {
+            antenner: antenner,
+            haplotyper: haplotyper,
+            oyefargeX: oyefargeX,
+            kjonn: kjonn
+        };
+
+
+        avkom.push(individ);
+    }
+
+
+    return avkom;
+}
 
 // ---------------------------------------------------------
 // FENOTYPE → BILDEFIL
