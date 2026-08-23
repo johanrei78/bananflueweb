@@ -614,6 +614,8 @@ document
     .getElementById("utfor-krysning")
     .addEventListener("click", function () {
 
+        console.log("Utfør krysning-knappen ble trykket");
+        
         if (state.nesteForeldre.length !== 2) {
 
             alert(
