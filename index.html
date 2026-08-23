@@ -24,11 +24,82 @@
 
     <main id="main-content">
 
+    <section id="velg-foreldre">
         <h2>Velg foreldre</h2>
 
         <p>
             Velg fenotypene til foreldrene i P-generasjonen.
         </p>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label for="antenner">Antenner</label>
+                <select id="antenner">
+                    <option value="Normal">Normal</option>
+                    <option value="Aristapedia">Aristapedia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="oyefarge">Øyefarge</label>
+                <select id="oyefarge">
+                    <option value="Rød">Rød</option>
+                    <option value="Hvit">Hvit</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="kropp">Kropp</label>
+                <select id="kropp">
+                    <option value="Grå">Grå</option>
+                    <option value="Sort">Sort</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="vinger">Vinger</label>
+                <select id="vinger">
+                    <option value="Normal">Normal</option>
+                    <option value="Redusert">Redusert</option>
+                </select>
+            </div>
+
+        </div>
+
+        <fieldset class="sex-choice">
+            <legend>Kjønn</legend>
+
+            <label>
+                <input type="radio" name="kjonn" value="Hunn" checked>
+                Hunn ♀
+            </label>
+
+            <label>
+                <input type="radio" name="kjonn" value="Hann">
+                Hann ♂
+            </label>
+        </fieldset>
+
+        <div class="button-row">
+            <button type="button" id="legg-til-forelder">
+                Legg til forelder
+            </button>
+
+            <button type="button" id="reset">
+                Reset
+            </button>
+        </div>
+
+        <h3>Valgte P-foreldre</h3>
+
+        <div id="valgte-foreldre" class="parent-grid">
+            <p>Ingen foreldre valgt ennå.</p>
+        </div>
+
+    </section>
+
+</main>
 
     </main>
 
