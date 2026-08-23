@@ -253,6 +253,65 @@ function kryss(parent1, parent2, baseN = 1000) {
 }
 
 // ---------------------------------------------------------
+// GENOTYPE → FENOTYPE
+// ---------------------------------------------------------
+
+function genotypeTilFenotype(geno) {
+
+    // Antenner:
+    // A er dominant og gir Aristapedia.
+    const antenner =
+        geno.antenner.includes("A")
+            ? "Aristapedia"
+            : "Normal";
+
+
+    // Kroppsfarge og vinger
+    const h1 = geno.haplotyper[0];
+    const h2 = geno.haplotyper[1];
+
+    // G er dominant over g.
+    const kropp =
+        h1.includes("G") || h2.includes("G")
+            ? "Grå"
+            : "Sort";
+
+    // V er dominant over v.
+    const vinger =
+        h1.includes("V") || h2.includes("V")
+            ? "Normal"
+            : "Redusert";
+
+
+    // X-bundet øyefarge
+    let oye;
+
+    if (geno.kjonn === "Hann") {
+
+        oye =
+            geno.oyefargeX[0] === "w"
+                ? "Hvit"
+                : "Rød";
+
+    } else {
+
+        oye =
+            geno.oyefargeX[0] === "w" &&
+            geno.oyefargeX[1] === "w"
+                ? "Hvit"
+                : "Rød";
+    }
+
+
+    return {
+        ant: antenner,
+        oye: oye,
+        kropp: kropp,
+        vinge: vinger
+    };
+}
+
+// ---------------------------------------------------------
 // FENOTYPE → BILDEFIL
 // ---------------------------------------------------------
 
@@ -546,3 +605,49 @@ function visKrysningsforeldre() {
         container.appendChild(card);
     });
 }
+
+// ---------------------------------------------------------
+// UTFØR KRYSNING
+// ---------------------------------------------------------
+
+document
+    .getElementById("utfor-krysning")
+    .addEventListener("click", function () {
+
+        if (state.nesteForeldre.length !== 2) {
+
+            alert(
+                "Du må velge to foreldre før du kan utføre krysningen."
+            );
+
+            return;
+        }
+
+
+        const parent1 = state.nesteForeldre[0];
+        const parent2 = state.nesteForeldre[1];
+
+
+        const avkom =
+            kryss(parent1, parent2, 1000);
+
+
+        state.kryssNr += 1;
+
+        state.alleKryss.push(avkom);
+
+        state.alleForeldrePerKryss.push([
+            parent1,
+            parent2
+        ]);
+
+
+        // Etter utført kryss må nye foreldre velges
+        // før neste krysning.
+        state.nesteForeldre = [];
+
+
+        alert(
+            `Krysning ${state.kryssNr} er fullført med ${avkom.length} levende avkom.`
+        );
+    });
