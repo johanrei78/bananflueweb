@@ -15,11 +15,11 @@
         <h1>Arv hos bananfluer</h1>
 
         <nav aria-label="Hovedmeny">
-            <button type="button">Velg foreldre</button>
-            <button type="button">Krysning</button>
-            <button type="button">Resultater</button>
-            <button type="button">Oppsummering</button>
-        </nav>
+            <button type="button" data-page="velg-foreldre">Velg foreldre</button>
+            <button type="button" data-page="krysning">Krysning</button>
+            <button type="button" data-page="resultater">Resultater</button>
+            <button type="button" data-page="oppsummering">Oppsummering</button>
+    </nav>
     </header>
 
     <main id="main-content">
@@ -99,6 +99,25 @@
 
     </section>
 
+    <section id="krysning" hidden>
+
+    <h2>Krysning</h2>
+
+    <p id="krysning-status">
+        Start med å velge to P-foreldre på siden «Velg foreldre».
+    </p>
+
+    <div id="krysningsforeldre" class="parent-grid">
+    </div>
+
+    <div class="button-row">
+        <button type="button" id="utfor-krysning">
+            Utfør krysning (≈1000 avkom)
+        </button>
+    </div>
+
+    </section>
+        
 </main>
 
     </main>
