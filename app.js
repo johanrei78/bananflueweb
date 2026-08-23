@@ -243,3 +243,122 @@ document
 
         visForeldre();
     });
+
+
+// ---------------------------------------------------------
+// NAVIGASJON
+// ---------------------------------------------------------
+
+const pages = [
+    "velg-foreldre",
+    "krysning"
+];
+
+function visSide(pageId) {
+
+    pages.forEach(function (id) {
+
+        const page = document.getElementById(id);
+
+        if (page) {
+            page.hidden = id !== pageId;
+        }
+    });
+
+    if (pageId === "krysning") {
+        visKrysningsforeldre();
+    }
+}
+
+
+document
+    .querySelectorAll("nav button[data-page]")
+    .forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const pageId = button.dataset.page;
+
+            // Resultater og oppsummering lager vi senere.
+            if (pageId === "resultater" ||
+                pageId === "oppsummering") {
+
+                alert("Denne siden kommer i neste del av appen.");
+                return;
+            }
+
+            visSide(pageId);
+        });
+    });
+
+
+// ---------------------------------------------------------
+// VIS FORELDRE PÅ KRYSNINGSSIDEN
+// ---------------------------------------------------------
+
+function visKrysningsforeldre() {
+
+    const container =
+        document.getElementById("krysningsforeldre");
+
+    const status =
+        document.getElementById("krysning-status");
+
+    container.innerHTML = "";
+
+    if (state.nesteForeldre.length !== 2) {
+
+        status.textContent =
+            "Start med å velge to P-foreldre på siden «Velg foreldre».";
+
+        return;
+    }
+
+    status.textContent =
+        "Disse foreldrene er klare til krysning.";
+
+    state.nesteForeldre.forEach(function (forelder, index) {
+
+        const ant = forelder.valgtFenotype.ant;
+        const oye = forelder.valgtFenotype.oye;
+        const kropp = forelder.valgtFenotype.kropp;
+        const vinge = forelder.valgtFenotype.vinge;
+
+        const imageCode =
+            phenotypeToImageCode(
+                ant,
+                oye,
+                vinge,
+                kropp
+            );
+
+        const imagePath =
+            `images/${imageCode}.png`;
+
+        const kjonnSymbol =
+            forelder.kjonn === "Hunn" ? "♀" : "♂";
+
+        const card =
+            document.createElement("div");
+
+        card.innerHTML = `
+            <h3>Forelder ${index + 1}</h3>
+
+            <img
+                src="${imagePath}"
+                alt="Valgt forelder ${index + 1}"
+                width="150"
+            >
+
+            <p>
+                ${ant} antenner,
+                ${oye.toLowerCase()}e øyne,
+                ${vinge.toLowerCase()}e vinger,
+                ${kropp.toLowerCase()} kropp
+                (${kjonnSymbol})
+            </p>
+        `;
+
+        container.appendChild(card);
+    });
+}
