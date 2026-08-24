@@ -225,3 +225,24 @@ section h3 {
 #resultat-grid > section {
     grid-column: 1 / -1;
 }
+
+nav button {
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    font-weight: 600;
+}
+
+nav button:hover {
+    background-color: #f3f4f6;
+}
+
+nav button.aktiv-side {
+    border-bottom-color: #1d4ed8;
+}
+
+header h1 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
