@@ -217,3 +217,11 @@ section h3 {
 #resultat-grid {
     margin-bottom: 2rem;
 }
+
+#resultat-grid > h3 {
+    grid-column: 1 / -1;
+}
+
+#resultat-grid > section {
+    grid-column: 1 / -1;
+}
