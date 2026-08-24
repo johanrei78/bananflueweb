@@ -276,3 +276,11 @@ header h1 {
 .app-melding.suksess {
     border-width: 2px;
 }
+
+button:focus-visible,
+select:focus-visible,
+input[type="radio"]:focus-visible,
+input[type="checkbox"]:focus-visible {
+    outline: 3px solid #1d4ed8;
+    outline-offset: 3px;
+}
