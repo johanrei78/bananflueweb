@@ -864,7 +864,7 @@ function visResultater() {
             genotypeTilFenotype(forelder);
 
         const altTekst = 
-            lagAltTekst(ph):
+            lagAltTekst(ph);
         
         const imageCode =
             phenotypeToImageCode(
