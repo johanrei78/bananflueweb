@@ -494,7 +494,8 @@ document
 
 const pages = [
     "velg-foreldre",
-    "krysning"
+    "krysning",
+    "resultater"
 ];
 
 function visSide(pageId) {
@@ -511,6 +512,11 @@ function visSide(pageId) {
     if (pageId === "krysning") {
         visKrysningsforeldre();
     }
+
+    if (pageId === "resultater") {
+        visResultater();
+    }
+    
 }
 
 
@@ -523,10 +529,9 @@ document
             const pageId = button.dataset.page;
 
             // Resultater og oppsummering lager vi senere.
-            if (pageId === "resultater" ||
-                pageId === "oppsummering") {
+            if (pageId === "oppsummering") {
 
-                alert("Denne siden kommer i neste del av appen.");
+                alert("Denne siden kommer senere.");
                 return;
             }
 
@@ -653,3 +658,144 @@ document
             `Krysning ${state.kryssNr} er fullført med ${avkom.length} levende avkom.`
         );
     });
+
+// ---------------------------------------------------------
+// VIS RESULTATER
+// ---------------------------------------------------------
+
+function visResultater() {
+
+    const status =
+        document.getElementById("resultat-status");
+
+    const container =
+        document.getElementById("resultat-grid");
+
+    container.innerHTML = "";
+
+
+    if (state.alleKryss.length === 0) {
+
+        status.textContent =
+            "Ingen krysninger ennå.";
+
+        return;
+    }
+
+
+    // Vi viser foreløpig det nyeste krysset.
+    const avkom =
+        state.alleKryss[state.alleKryss.length - 1];
+
+
+    status.textContent =
+        `Krysning ${state.alleKryss.length}: ${avkom.length} levende avkom.`;
+
+
+    // -----------------------------------------------------
+    // GRUPPER AVKOM ETTER FENOTYPE
+    // -----------------------------------------------------
+
+    const grupper = {};
+
+
+    avkom.forEach(function (geno) {
+
+        const ph =
+            genotypeTilFenotype(geno);
+
+        const key =
+            `${ph.ant}|${ph.oye}|${ph.vinge}|${ph.kropp}`;
+
+
+        if (!grupper[key]) {
+
+            grupper[key] = {
+                fenotype: ph,
+                total: 0,
+                hann: 0,
+                hunn: 0
+            };
+        }
+
+
+        grupper[key].total += 1;
+
+
+        if (geno.kjonn === "Hann") {
+            grupper[key].hann += 1;
+        } else {
+            grupper[key].hunn += 1;
+        }
+    });
+
+
+    // -----------------------------------------------------
+    // SORTER: VANLIGSTE FENOTYPE FØRST
+    // -----------------------------------------------------
+
+    const sorterteGrupper =
+        Object.values(grupper)
+            .sort(function (a, b) {
+                return b.total - a.total;
+            });
+
+
+    // -----------------------------------------------------
+    // VIS ÉN FLUE PER FENOTYPE
+    // -----------------------------------------------------
+
+    sorterteGrupper.forEach(function (gruppe) {
+
+        const ph =
+            gruppe.fenotype;
+
+
+        const imageCode =
+            phenotypeToImageCode(
+                ph.ant,
+                ph.oye,
+                ph.vinge,
+                ph.kropp
+            );
+
+
+        const imagePath =
+            `images/${imageCode}.png`;
+
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "result-card";
+
+
+        card.innerHTML = `
+            <img
+                src="${imagePath}"
+                alt="Bananflue med ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp"
+                width="150"
+            >
+
+            <p>
+                <strong>
+                    ${ph.ant} antenner,
+                    ${ph.oye.toLowerCase()}e øyne,
+                    ${ph.vinge.toLowerCase()}e vinger,
+                    ${ph.kropp.toLowerCase()} kropp
+                </strong>
+            </p>
+
+            <p>
+                Antall: ${gruppe.total}<br>
+                ♂ ${gruppe.hann}
+                &nbsp;&nbsp;
+                ♀ ${gruppe.hunn}
+            </p>
+        `;
+
+
+        container.appendChild(card);
+    });
+}
