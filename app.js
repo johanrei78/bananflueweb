@@ -1387,15 +1387,22 @@ function visOppsummering() {
     table.className =
         "oppsummering-tabell";
 
+    const caption =
+        document.createElement("caption");
 
+    caption.textContent =
+        `Fenotypefordeling for krysning ${kryssIndex + 1}`;
+
+    table.appendChild(caption);
+    
     if (ignorerKjonn) {
 
-        table.innerHTML = `
+        table.innerHTML += `
             <thead>
                 <tr>
-                    <th>Fenotype</th>
-                    <th>Antall</th>
-                    <th>Andel</th>
+                    <th scope="col">Fenotype</th>
+                    <th scope="col">Antall</th>
+                    <th scope="col">Andel</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -1403,16 +1410,16 @@ function visOppsummering() {
 
     } else {
 
-        table.innerHTML = `
+        table.innerHTML += `
             <thead>
                 <tr>
-                    <th>Fenotype</th>
-                    <th>Antall</th>
-                    <th>Andel</th>
-                    <th>♂ Antall</th>
-                    <th>♂ Andel</th>
-                    <th>♀ Antall</th>
-                    <th>♀ Andel</th>
+                    <th scope="col">Fenotype</th>
+                    <th scope="col">Antall</th>
+                    <th scope="col">Andel</th>
+                    <th scope="col">♂ Antall</th>
+                    <th scope="col">♂ Andel</th>
+                    <th scope="col">♀ Antall</th>
+                    <th scope="col">♀ Andel</th>
                 </tr>
             </thead>
             <tbody></tbody>
