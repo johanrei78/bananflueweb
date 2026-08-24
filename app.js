@@ -620,12 +620,23 @@ function visKrysningsforeldre() {
 
     if (state.nesteForeldre.length !== 2) {
 
-        status.textContent =
-            "Start med å velge to P-foreldre på siden «Velg foreldre».";
+        if (
+            state.foreldre.length < 2 &&
+            state.alleKryss.length === 0
+        ) {
+
+            status.textContent =
+                "Start med å velge to P-foreldre på siden «Velg foreldre».";
+
+        } else {
+
+            status.textContent =
+                "Velg to foreldre, én hunn og én hann, på siden «Resultater».";
+        }
 
         return;
     }
-
+    
     status.textContent =
         "Disse foreldrene er klare til krysning.";
 
