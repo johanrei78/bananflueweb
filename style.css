@@ -91,3 +91,22 @@ input:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
 }
+
+#resultat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.result-card {
+    padding: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.result-card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
