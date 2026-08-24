@@ -714,7 +714,15 @@ function visResultater() {
                 fenotype: ph,
                 total: 0,
                 hann: 0,
-                hunn: 0
+                hunn: 0,
+
+                // Her lagrer vi de faktiske individene
+                // slik at ett av dem senere kan velges tilfeldig.
+                hanner: [],
+                hunner: []
+            };
+        }
+                
             };
         }
 
@@ -723,9 +731,14 @@ function visResultater() {
 
 
         if (geno.kjonn === "Hann") {
+
             grupper[key].hann += 1;
+            grupper[key].hanner.push(geno);
+
         } else {
+
             grupper[key].hunn += 1;
+            grupper[key].hunner.push(geno);
         }
     });
 
@@ -793,9 +806,113 @@ function visResultater() {
                 &nbsp;&nbsp;
                 ♀ ${gruppe.hunn}
             </p>
+
+            <div class="result-buttons">
+
+                <button
+                    type="button"
+                    class="velg-hunn"
+                    ${gruppe.hunn === 0 ? "disabled" : ""}
+                >
+                    Velg hunn
+                </button>
+
+                <button
+                    type="button"
+                    class="velg-hann"
+                    ${gruppe.hann === 0 ? "disabled" : ""}
+                >
+                    Velg hann
+                </button>
+
+            </div>
         `;
 
+        const hunnKnapp =
+            card.querySelector(".velg-hunn");
 
+        const hannKnapp =
+            card.querySelector(".velg-hann");
+
+
+        hunnKnapp.addEventListener("click", function () {
+
+            velgTilNesteKryss(
+                gruppe.hunner,
+                "Hunn"
+            );
+        });
+
+
+        hannKnapp.addEventListener("click", function () {
+
+            velgTilNesteKryss(
+                gruppe.hanner,
+                "Hann"
+            );
+        });
+        
         container.appendChild(card);
     });
+}
+
+// ---------------------------------------------------------
+// VELG AVKOM TIL NESTE KRYSS
+// ---------------------------------------------------------
+
+function velgTilNesteKryss(individer, kjonn) {
+
+    if (individer.length === 0) {
+        return;
+    }
+
+
+    // Maksimalt to foreldre kan velges.
+    if (state.nesteForeldre.length >= 2) {
+
+        alert(
+            "Du har allerede valgt to foreldre til neste kryss."
+        );
+
+        return;
+    }
+
+
+    // Hvis én forelder allerede er valgt,
+    // må den neste ha motsatt kjønn.
+    if (
+        state.nesteForeldre.length === 1 &&
+        state.nesteForeldre[0].kjonn === kjonn
+    ) {
+
+        alert(
+            "Du må velge et individ av motsatt kjønn."
+        );
+
+        return;
+    }
+
+
+    // Velg tilfeldig blant alle individer med
+    // denne fenotypen og dette kjønnet.
+    const kandidat =
+        tilfeldigFra(individer);
+
+
+    // Avkom har ikke valgtFenotype fra P-siden.
+    // Derfor lager vi fenotypen fra genotypen.
+    kandidat.valgtFenotype =
+        genotypeTilFenotype(kandidat);
+
+
+    state.nesteForeldre.push(kandidat);
+
+
+    const symbol =
+        kjonn === "Hunn" ? "♀" : "♂";
+
+
+    alert(
+        `${kjonn} ${symbol} er valgt til neste kryss.`
+    );
 }
