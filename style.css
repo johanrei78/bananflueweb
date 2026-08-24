@@ -331,3 +331,13 @@ input[type="checkbox"]:focus-visible {
 #velg-foreldre h3 {
     margin-top: 2rem;
 }
+
+.primary-button {
+    font-weight: 700;
+    border: 2px solid #1d4ed8;
+}
+
+.secondary-button {
+    background: transparent;
+    border: 1px solid #9ca3af;
+}
