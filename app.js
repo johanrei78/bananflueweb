@@ -14,6 +14,34 @@ const state = {
 };
 
 // ---------------------------------------------------------
+// MELDINGER TIL BRUKEREN
+// ---------------------------------------------------------
+
+function visMelding(tekst, type = "info") {
+
+    const melding =
+        document.getElementById("app-melding");
+
+    melding.textContent = tekst;
+
+    melding.className =
+        `app-melding ${type}`;
+
+    melding.hidden = false;
+}
+
+
+function skjulMelding() {
+
+    const melding =
+        document.getElementById("app-melding");
+
+    melding.hidden = true;
+    melding.textContent = "";
+    melding.className = "app-melding";
+}
+
+// ---------------------------------------------------------
 // LAG FORELDER I P-GENERASJONEN
 // ---------------------------------------------------------
 
@@ -400,7 +428,10 @@ document
     .addEventListener("click", function () {
 
         if (state.foreldre.length >= 2) {
-            alert("Du kan bare velge to foreldre.");
+            visMelding(
+                "Du kan bare velge to foreldre.",
+                "feil"
+            );
             return;
         }
 
@@ -429,8 +460,9 @@ document
                 state.foreldre[0].kjonn;
 
             if (forsteKjonn === kjonn) {
-                alert(
-                    "Forelder 2 må ha motsatt kjønn av forelder 1."
+                visMelding(
+                    "Forelder 2 må ha motsatt kjønn av forelder 1.",
+                    "feil"
                 );
                 return;
             }
@@ -459,6 +491,10 @@ document
 
         state.foreldre.push(forelder);
 
+        visMelding(
+            "Forelder er lagt til.",
+            "suksess"
+        );
 
         // Når begge P-foreldrene er valgt,
         // er de klare til første kryss.
@@ -504,6 +540,8 @@ const pages = [
 
 function visSide(pageId) {
 
+    skjulMelding();
+    
     pages.forEach(function (id) {
 
         const page = document.getElementById(id);
@@ -649,9 +687,10 @@ document
         
         if (state.nesteForeldre.length !== 2) {
 
-            alert(
-                "Du må velge to foreldre før du kan utføre krysningen."
-            );
+            visMelding(
+                "Du må velge to foreldre før du kan utføre krysningen.",
+                "feil"
+        );
 
             return;
         }
@@ -683,8 +722,9 @@ document
         state.nesteForeldre = [];
 
 
-        alert(
-            `Krysning ${state.kryssNr} er fullført med ${avkom.length} levende avkom.`
+        visMelding(
+            `Krysning ${state.kryssNr} er fullført med ${avkom.length} levende avkom.`,
+            "suksess"
         );
     });
 
@@ -1034,9 +1074,11 @@ function velgTilNesteKryss(individer, kjonn) {
     // Maksimalt to foreldre kan velges.
     if (state.nesteForeldre.length >= 2) {
 
-        alert(
-            "Du har allerede valgt to foreldre til neste kryss."
+        visMelding(
+            "Du har allerede valgt to foreldre til neste kryss.",
+            "feil"
         );
+        
 
         return;
     }
@@ -1049,8 +1091,9 @@ function velgTilNesteKryss(individer, kjonn) {
         state.nesteForeldre[0].kjonn === kjonn
     ) {
 
-        alert(
-            "Du må velge et individ av motsatt kjønn."
+        visMelding(
+            "Du må velge et individ av motsatt kjønn.",
+            "feil"
         );
 
         return;
@@ -1076,8 +1119,9 @@ function velgTilNesteKryss(individer, kjonn) {
         kjonn === "Hunn" ? "♀" : "♂";
 
 
-    alert(
-        `${kjonn} ${symbol} er valgt til neste kryss.`
+    visMelding(
+        `${kjonn} ${symbol} er valgt til neste kryss.`,
+        "suksess"
     );
 }
 
@@ -1089,8 +1133,9 @@ function velgEksisterendeForelder(forelder) {
 
     if (state.nesteForeldre.length >= 2) {
 
-        alert(
-            "Du har allerede valgt to foreldre til neste kryss."
+        visMelding(
+            "Du har allerede valgt to foreldre til neste kryss.",
+            "feil"
         );
 
         return;
@@ -1102,8 +1147,9 @@ function velgEksisterendeForelder(forelder) {
         state.nesteForeldre[0].kjonn === forelder.kjonn
     ) {
 
-        alert(
-            "Du må velge et individ av motsatt kjønn."
+        visMelding(
+            "Du må velge et individ av motsatt kjønn.",
+            "feil"
         );
 
         return;
@@ -1122,10 +1168,11 @@ function velgEksisterendeForelder(forelder) {
             ? "♀"
             : "♂";
 
-
-    alert(
-        `${forelder.kjonn} ${symbol} er valgt til neste kryss.`
+    visMelding(
+        `${forelder.kjonn} ${symbol} er valgt til neste kryss.`,
+        "suksess"
     );
+
 }
 
 // ---------------------------------------------------------
