@@ -513,6 +513,31 @@ function visSide(pageId) {
         }
     });
 
+    // Marker aktiv side i hovedmenyen
+    document
+        .querySelectorAll("nav button[data-page]")
+        .forEach(function (button) {
+
+            const erAktiv =
+                button.dataset.page === pageId;
+
+            button.classList.toggle(
+                "aktiv-side",
+                erAktiv
+            );
+
+            if (erAktiv) {
+                button.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+            } else {
+                button.removeAttribute(
+                    "aria-current"
+                );
+            }
+        });
+    
     if (pageId === "krysning") {
         visKrysningsforeldre();
     }
@@ -1332,3 +1357,5 @@ document
 
         visOppsummering();
     });
+
+visSide("velg-foreldre");
