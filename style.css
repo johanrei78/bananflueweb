@@ -255,3 +255,19 @@ header h1 {
 .resultat-fane.aktiv {
     border-bottom-color: #1d4ed8;
 }
+
+.app-melding {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #9ca3af;
+    border-radius: 8px;
+    background-color: #f9fafb;
+}
+
+.app-melding.feil {
+    border-width: 2px;
+}
+
+.app-melding.suksess {
+    border-width: 2px;
+}
