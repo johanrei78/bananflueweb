@@ -362,6 +362,14 @@ function phenotypeToImageCode(ant, oye, vinge, kropp) {
     return `${antCode}_${oyeCode}_${vingeCode}_${kroppCode}`;
 }
 
+// ---------------------------------------------------------
+// ALT-TEKST FOR BANANFLUEBILDER
+// ---------------------------------------------------------
+
+function lagAltTekst(ph) {
+
+    return `Bananflue: ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp.`;
+}
 
 // ---------------------------------------------------------
 // VIS VALGTE FORELDRE
@@ -396,12 +404,15 @@ function visForeldre() {
         const kjonnSymbol =
             forelder.kjonn === "Hunn" ? "♀" : "♂";
 
+        const altTekst =
+            lagAltTekst(forelder.valgtFenotype);
+        
         card.innerHTML = `
             <h4>Forelder ${index + 1}</h4>
 
             <img
                 src="${imagePath}"
-                alt="Bananflue med ${ant.toLowerCase()} antenner, ${oye.toLowerCase()}e øyne, ${vinge.toLowerCase()}e vinger og ${kropp.toLowerCase()} kropp"
+                alt="${altTekst}"
                 width="150"
             >
 
@@ -664,12 +675,15 @@ function visKrysningsforeldre() {
         const card =
             document.createElement("div");
 
+        const altTekst =
+            lagAltTekst(forelder.valgtFenotype);
+        
         card.innerHTML = `
             <h3>Forelder ${index + 1}</h3>
 
             <img
                 src="${imagePath}"
-                alt="Valgt forelder ${index + 1}"
+                alt="${altTekst}"
                 width="150"
             >
 
@@ -836,6 +850,9 @@ function visResultater() {
         const ph =
             genotypeTilFenotype(forelder);
 
+        const altTekst = 
+            lagAltTekst(ph):
+        
         const imageCode =
             phenotypeToImageCode(
                 ph.ant,
@@ -858,7 +875,7 @@ function visResultater() {
 
             <img
                 src="${imagePath}"
-                alt="Forelder ${index + 1}"
+                alt="${altTekst}"
                 width="150"
             >
 
@@ -998,11 +1015,13 @@ function visResultater() {
         card.className =
             "result-card";
 
-
+        const altTekst =
+            lagAltTekst(ph);
+        
         card.innerHTML = `
             <img
                 src="${imagePath}"
-                alt="Bananflue med ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp"
+                alt="${altTekst}"
                 width="150"
             >
 
