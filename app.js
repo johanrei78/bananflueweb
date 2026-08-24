@@ -771,7 +771,12 @@ function visResultater() {
         document.getElementById("resultat-faner");
 
     faneContainer.innerHTML = "";
-    
+
+    faneContainer.setAttribute("role", "tablist");
+    faneContainer.setAttribute(
+        "aria-label",
+        "Velg krysning"
+    );
     
     if (state.alleKryss.length === 0) {
 
@@ -798,9 +803,17 @@ function visResultater() {
         knapp.className =
             "resultat-fane";
 
+        knapp.setAttribute("role", "tab");
+
+        knapp.setAttribute(
+            "aria-selected",
+            index === state.aktivtKryss
+                ? "true"
+                : "false"
+        );
+        
         if (index === state.aktivtKryss) {
             knapp.classList.add("aktiv");
-            knapp.setAttribute("aria-current", "true");
         }
 
         knapp.addEventListener(
@@ -1225,6 +1238,14 @@ function visOppsummering() {
 
 
     faneContainer.innerHTML = "";
+
+    faneContainer.setAttribute("role", "tablist");
+
+    faneContainer.setAttribute(
+        "aria-label",
+        "Velg krysning"
+    );
+    
     tabellContainer.innerHTML = "";
 
 
@@ -1254,9 +1275,17 @@ function visOppsummering() {
         knapp.className =
             "resultat-fane";
 
+        knapp.setAttribute("role", "tab");
+
+        knapp.setAttribute(
+            "aria-selected",
+            index === state.aktivtKryss
+                ? "true"
+                : "false"
+        );
+        
         if (index === state.aktivtKryss) {
             knapp.classList.add("aktiv");
-            knapp.setAttribute("aria-current", "true");
         }
 
         knapp.addEventListener(
