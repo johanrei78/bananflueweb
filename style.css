@@ -341,3 +341,19 @@ input[type="checkbox"]:focus-visible {
     background: transparent;
     border: 1px solid #9ca3af;
 }
+
+#krysning {
+    max-width: 1000px;
+}
+
+#krysning-status {
+    margin-bottom: 1.5rem;
+}
+
+#krysningsforeldre {
+    margin-bottom: 1.5rem;
+}
+
+#krysning .button-row {
+    margin-top: 1.5rem;
+}
