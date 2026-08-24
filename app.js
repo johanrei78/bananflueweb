@@ -1041,6 +1041,9 @@ function visResultater() {
 
         const altTekst =
             lagAltTekst(ph);
+
+        const fenotypeBeskrivelse =
+            `${ph.ant} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
         
         card.innerHTML = `
             <img
