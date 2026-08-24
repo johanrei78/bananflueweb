@@ -823,6 +823,15 @@ function visResultater() {
     parentSection.appendChild(parentGrid);
 
     container.appendChild(parentSection);
+
+    const offspringHeading =
+        document.createElement("h3");
+
+    offspringHeading.textContent =
+        "Avkom – fenotyper";
+
+    container.appendChild(offspringHeading);
+    
     // -----------------------------------------------------
     // GRUPPER AVKOM ETTER FENOTYPE
     // -----------------------------------------------------
