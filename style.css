@@ -303,3 +303,31 @@ input[type="checkbox"]:focus-visible {
 .parent-grid .velg-tidligere-forelder {
     margin-top: auto;
 }
+
+#velg-foreldre {
+    max-width: 1000px;
+}
+
+#velg-foreldre > p {
+    margin-bottom: 1.5rem;
+}
+
+.sex-choice {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.sex-choice legend {
+    margin-bottom: 0.5rem;
+}
+
+.button-row {
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+#velg-foreldre h3 {
+    margin-top: 2rem;
+}
