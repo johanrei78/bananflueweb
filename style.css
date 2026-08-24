@@ -138,3 +138,28 @@ input:focus-visible {
     font-weight: 700;
     border: 2px solid #111827;
 }
+
+.oppsummering-valg {
+    margin: 1rem 0 1.5rem 0;
+}
+
+.oppsummering-tabell {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.oppsummering-tabell th,
+.oppsummering-tabell td {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    text-align: left;
+    vertical-align: top;
+}
+
+.oppsummering-tabell th {
+    font-weight: 700;
+}
+
+#oppsummering-tabell {
+    overflow-x: auto;
+}
