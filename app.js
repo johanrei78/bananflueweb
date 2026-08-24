@@ -514,7 +514,7 @@ function visSide(pageId) {
     }
 
     if (pageId === "resultater") {
-        ();
+        visResultater();
     }
     
 }
