@@ -1073,6 +1073,7 @@ function visResultater() {
                 <button
                     type="button"
                     class="velg-hunn"
+                    aria-label="Velg hunn: ${fenotypeBeskrivelse}"
                     ${gruppe.hunn === 0 ? "disabled" : ""}
                 >
                     Velg hunn
@@ -1081,6 +1082,7 @@ function visResultater() {
                 <button
                     type="button"
                     class="velg-hann"
+                    aria-label="Velg hann: ${fenotypeBeskrivelse}"
                     ${gruppe.hann === 0 ? "disabled" : ""}
                 >
                     Velg hann
