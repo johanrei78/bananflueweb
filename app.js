@@ -735,6 +735,7 @@ function visResultater() {
 
         if (index === state.aktivtKryss) {
             knapp.classList.add("aktiv");
+            knapp.setAttribute("aria-current", "true");
         }
 
         knapp.addEventListener(
@@ -1178,6 +1179,7 @@ function visOppsummering() {
 
         if (index === state.aktivtKryss) {
             knapp.classList.add("aktiv");
+            knapp.setAttribute("aria-current", "true");
         }
 
         knapp.addEventListener(
