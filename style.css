@@ -150,22 +150,6 @@ input:focus-visible {
     opacity: 0.5;
 }
 
-.resultat-faner {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin: 1.5rem 0;
-}
-
-.resultat-fane {
-    min-height: 44px;
-}
-
-.resultat-fane.aktiv {
-    font-weight: 700;
-    border: 2px solid #111827;
-}
-
 .oppsummering-valg {
     margin: 1rem 0 1.5rem 0;
 }
@@ -245,4 +229,29 @@ nav button.aktiv-side {
 header h1 {
     margin-top: 0;
     margin-bottom: 1rem;
+}
+
+.resultat-faner {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.resultat-fane {
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    padding: 10px 16px;
+    font-weight: 600;
+}
+
+.resultat-fane:hover {
+    background-color: #f3f4f6;
+}
+
+.resultat-fane.aktiv {
+    border-bottom-color: #1d4ed8;
 }
