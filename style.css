@@ -357,3 +357,50 @@ input[type="checkbox"]:focus-visible {
 #krysning .button-row {
     margin-top: 1.5rem;
 }
+
+#resultater {
+    max-width: 1200px;
+}
+
+#resultat-status {
+    margin-bottom: 1rem;
+}
+
+#resultat-faner {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#resultat-grid > h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.result-card {
+    min-height: 100%;
+}
+
+.result-card img {
+    margin-bottom: 0.75rem;
+}
+
+.result-card p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.result-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.result-buttons button {
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    .result-buttons {
+        grid-template-columns: 1fr;
+    }
+}
