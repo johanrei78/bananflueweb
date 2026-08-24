@@ -284,3 +284,22 @@ input[type="checkbox"]:focus-visible {
     outline: 3px solid #1d4ed8;
     outline-offset: 3px;
 }
+
+.oppsummering-tabell caption {
+    text-align: left;
+    font-weight: 700;
+    padding: 0 0 0.75rem 0;
+}
+
+.parent-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.parent-grid .velg-tidligere-forelder {
+    margin-top: auto;
+}
+
+.parent-grid .velg-tidligere-forelder {
+    margin-top: auto;
+}
