@@ -538,6 +538,7 @@ document
     .getElementById("reset")
     .addEventListener("click", function () {
 
+        // Nullstill appens data
         state.foreldre = [];
         state.alleKryss = [];
         state.alleForeldrePerKryss = [];
@@ -545,6 +546,17 @@ document
         state.kryssNr = 0;
         state.aktivtKryss = 0;
 
+        // Sett skjemaet tilbake til startverdiene
+        document.getElementById("antenner").value = "Normal";
+        document.getElementById("oyefarge").value = "Rød";
+        document.getElementById("kropp").value = "Grå";
+        document.getElementById("vinger").value = "Normal";
+
+        document.querySelector(
+            'input[name="kjonn"][value="Hunn"]'
+        ).checked = true;
+
+        // Oppdater visningen
         visForeldre();
     });
 
