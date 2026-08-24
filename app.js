@@ -514,7 +514,7 @@ function visSide(pageId) {
     }
 
     if (pageId === "resultater") {
-        visResultater();
+        ();
     }
     
 }
@@ -687,11 +687,96 @@ function visResultater() {
     const avkom =
         state.alleKryss[state.alleKryss.length - 1];
 
-
+    const foreldreBrukt =
+        state.alleForeldrePerKryss[
+            state.alleForeldrePerKryss.length - 1
+        ];
+    
     status.textContent =
         `Krysning ${state.alleKryss.length}: ${avkom.length} levende avkom.`;
 
+    const parentSection =
+        document.createElement("section");
 
+    parentSection.innerHTML = `
+        <h3>Foreldre brukt i dette krysset</h3>
+    `;
+
+    const parentGrid =
+        document.createElement("div");
+
+    parentGrid.className = "parent-grid";
+
+
+    foreldreBrukt.forEach(function (forelder, index) {
+
+        const ph =
+            genotypeTilFenotype(forelder);
+
+        const imageCode =
+            phenotypeToImageCode(
+                ph.ant,
+                ph.oye,
+                ph.vinge,
+                ph.kropp
+            );
+
+        const imagePath =
+            `images/${imageCode}.png`;
+
+        const symbol =
+            forelder.kjonn === "Hunn" ? "♀" : "♂";
+
+        const card =
+            document.createElement("div");
+
+        card.innerHTML = `
+            <h4>Forelder ${index + 1}</h4>
+
+            <img
+                src="${imagePath}"
+                alt="Forelder ${index + 1}"
+                width="150"
+            >
+
+            <p>
+                ${ph.ant} antenner,
+                ${ph.oye.toLowerCase()}e øyne,
+                ${ph.vinge.toLowerCase()}e vinger,
+                ${ph.kropp.toLowerCase()} kropp
+                (${symbol})
+            </p>
+
+            <button
+                type="button"
+                class="velg-tidligere-forelder"
+            >
+                Velg til neste kryss
+            </button>
+        `;
+
+        const knapp =
+            card.querySelector(
+                ".velg-tidligere-forelder"
+            );
+
+        knapp.addEventListener(
+            "click",
+            function () {
+
+                velgEksisterendeForelder(
+                    forelder
+                );
+            }
+        );
+
+        parentGrid.appendChild(card);
+    });
+
+
+    parentSection.appendChild(parentGrid);
+
+    container.appendChild(parentSection);
     // -----------------------------------------------------
     // GRUPPER AVKOM ETTER FENOTYPE
     // -----------------------------------------------------
@@ -912,5 +997,52 @@ function velgTilNesteKryss(individer, kjonn) {
 
     alert(
         `${kjonn} ${symbol} er valgt til neste kryss.`
+    );
+}
+
+// ---------------------------------------------------------
+// VELG TIDLIGERE FORELDER TIL NESTE KRYSS
+// ---------------------------------------------------------
+
+function velgEksisterendeForelder(forelder) {
+
+    if (state.nesteForeldre.length >= 2) {
+
+        alert(
+            "Du har allerede valgt to foreldre til neste kryss."
+        );
+
+        return;
+    }
+
+
+    if (
+        state.nesteForeldre.length === 1 &&
+        state.nesteForeldre[0].kjonn === forelder.kjonn
+    ) {
+
+        alert(
+            "Du må velge et individ av motsatt kjønn."
+        );
+
+        return;
+    }
+
+
+    forelder.valgtFenotype =
+        genotypeTilFenotype(forelder);
+
+
+    state.nesteForeldre.push(forelder);
+
+
+    const symbol =
+        forelder.kjonn === "Hunn"
+            ? "♀"
+            : "♂";
+
+
+    alert(
+        `${forelder.kjonn} ${symbol} er valgt til neste kryss.`
     );
 }
