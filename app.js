@@ -7,9 +7,11 @@ const state = {
     alleKryss: [],
     alleForeldrePerKryss: [],
     nesteForeldre: [],
-    kryssNr: 0
-};
+    kryssNr: 0,
 
+    // Indeksen til krysset som vises på Resultater-siden.
+    aktivtKryss: 0
+};
 
 // ---------------------------------------------------------
 // LAG FORELDER I P-GENERASJONEN
@@ -483,6 +485,7 @@ document
         state.alleForeldrePerKryss = [];
         state.nesteForeldre = [];
         state.kryssNr = 0;
+        state.aktivtKryss = 0;
 
         visForeldre();
     });
@@ -648,6 +651,9 @@ document
             parent2
         ]);
 
+        // Vis det nyeste krysset som standard på Resultater-siden.
+        state.aktivtKryss =
+            state.alleKryss.length - 1;
 
         // Etter utført kryss må nye foreldre velges
         // før neste krysning.
@@ -673,7 +679,12 @@ function visResultater() {
 
     container.innerHTML = "";
 
+    const faneContainer =
+        document.getElementById("resultat-faner");
 
+    faneContainer.innerHTML = "";
+    
+    
     if (state.alleKryss.length === 0) {
 
         status.textContent =
@@ -682,18 +693,55 @@ function visResultater() {
         return;
     }
 
+    // -----------------------------------------------------
+    // FANER FOR TIDLIGERE KRYSS
+    // -----------------------------------------------------
 
-    // Vi viser foreløpig det nyeste krysset.
+    state.alleKryss.forEach(function (_, index) {
+
+        const knapp =
+            document.createElement("button");
+
+        knapp.type = "button";
+
+        knapp.textContent =
+            `Krysning ${index + 1}`;
+
+        knapp.className =
+            "resultat-fane";
+
+        if (index === state.aktivtKryss) {
+            knapp.classList.add("aktiv");
+        }
+
+        knapp.addEventListener(
+            "click",
+            function () {
+
+                state.aktivtKryss = index;
+
+                visResultater();
+            }
+        );
+
+        faneContainer.appendChild(knapp);
+    });
+
+    // -----------------------------------------------------
+    // VELG HVILKET KRYSS SOM SKAL VISES
+    // -----------------------------------------------------
+
+    const kryssIndex =
+        state.aktivtKryss;
+
     const avkom =
-        state.alleKryss[state.alleKryss.length - 1];
+        state.alleKryss[kryssIndex];
 
     const foreldreBrukt =
-        state.alleForeldrePerKryss[
-            state.alleForeldrePerKryss.length - 1
-        ];
-    
+        state.alleForeldrePerKryss[kryssIndex];
+
     status.textContent =
-        `Krysning ${state.alleKryss.length}: ${avkom.length} levende avkom.`;
+        `Krysning ${kryssIndex + 1}: ${avkom.length} levende avkom.`;
 
     const parentSection =
         document.createElement("section");
