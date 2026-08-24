@@ -498,7 +498,8 @@ document
 const pages = [
     "velg-foreldre",
     "krysning",
-    "resultater"
+    "resultater",
+    "oppsummering"
 ];
 
 function visSide(pageId) {
@@ -519,7 +520,10 @@ function visSide(pageId) {
     if (pageId === "resultater") {
         visResultater();
     }
-    
+
+    if (pageId === "oppsummering") {
+        visOppsummering();
+    }
 }
 
 
@@ -531,12 +535,6 @@ document
 
             const pageId = button.dataset.page;
 
-            // Resultater og oppsummering lager vi senere.
-            if (pageId === "oppsummering") {
-
-                alert("Denne siden kommer senere.");
-                return;
-            }
 
             visSide(pageId);
         });
@@ -1094,3 +1092,234 @@ function velgEksisterendeForelder(forelder) {
         `${forelder.kjonn} ${symbol} er valgt til neste kryss.`
     );
 }
+
+// ---------------------------------------------------------
+// VIS OPPSUMMERING
+// ---------------------------------------------------------
+
+function visOppsummering() {
+
+    const status =
+        document.getElementById("oppsummering-status");
+
+    const faneContainer =
+        document.getElementById("oppsummering-faner");
+
+    const tabellContainer =
+        document.getElementById("oppsummering-tabell");
+
+    const ignorerKjonn =
+        document.getElementById("ignorer-kjonn").checked;
+
+
+    faneContainer.innerHTML = "";
+    tabellContainer.innerHTML = "";
+
+
+    if (state.alleKryss.length === 0) {
+
+        status.textContent =
+            "Ingen krysninger ennå.";
+
+        return;
+    }
+
+
+    // -----------------------------------------------------
+    // FANER
+    // -----------------------------------------------------
+
+    state.alleKryss.forEach(function (_, index) {
+
+        const knapp =
+            document.createElement("button");
+
+        knapp.type = "button";
+
+        knapp.textContent =
+            `Krysning ${index + 1}`;
+
+        knapp.className =
+            "resultat-fane";
+
+        if (index === state.aktivtKryss) {
+            knapp.classList.add("aktiv");
+        }
+
+        knapp.addEventListener(
+            "click",
+            function () {
+
+                state.aktivtKryss = index;
+
+                visOppsummering();
+            }
+        );
+
+        faneContainer.appendChild(knapp);
+    });
+
+
+    const kryssIndex =
+        state.aktivtKryss;
+
+    const avkom =
+        state.alleKryss[kryssIndex];
+
+    status.textContent =
+        `Krysning ${kryssIndex + 1}: ${avkom.length} levende avkom.`;
+
+
+    // -----------------------------------------------------
+    // GRUPPER AVKOM
+    // -----------------------------------------------------
+
+    const grupper = {};
+
+
+    avkom.forEach(function (geno) {
+
+        const ph =
+            genotypeTilFenotype(geno);
+
+        const key =
+            `${ph.ant}|${ph.oye}|${ph.vinge}|${ph.kropp}`;
+
+
+        if (!grupper[key]) {
+
+            grupper[key] = {
+                fenotype: ph,
+                total: 0,
+                hann: 0,
+                hunn: 0
+            };
+        }
+
+
+        grupper[key].total += 1;
+
+
+        if (geno.kjonn === "Hann") {
+            grupper[key].hann += 1;
+        } else {
+            grupper[key].hunn += 1;
+        }
+    });
+
+
+    const sorterteGrupper =
+        Object.values(grupper)
+            .sort(function (a, b) {
+                return b.total - a.total;
+            });
+
+
+    // -----------------------------------------------------
+    // LAG TABELL
+    // -----------------------------------------------------
+
+    const table =
+        document.createElement("table");
+
+    table.className =
+        "oppsummering-tabell";
+
+
+    if (ignorerKjonn) {
+
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Fenotype</th>
+                    <th>Antall</th>
+                    <th>Andel</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        `;
+
+    } else {
+
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Fenotype</th>
+                    <th>Antall</th>
+                    <th>Andel</th>
+                    <th>♂ Antall</th>
+                    <th>♂ Andel</th>
+                    <th>♀ Antall</th>
+                    <th>♀ Andel</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        `;
+    }
+
+
+    const tbody =
+        table.querySelector("tbody");
+
+
+    sorterteGrupper.forEach(function (gruppe) {
+
+        const ph =
+            gruppe.fenotype;
+
+        const fenotypeTekst =
+            `${ph.ant} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger, ${ph.kropp.toLowerCase()} kropp`;
+
+        const total =
+            avkom.length;
+
+        const andel =
+            (gruppe.total * 100 / total).toFixed(1);
+
+
+        const row =
+            document.createElement("tr");
+
+
+        if (ignorerKjonn) {
+
+            row.innerHTML = `
+                <td>${fenotypeTekst}</td>
+                <td>${gruppe.total}</td>
+                <td>${andel} %</td>
+            `;
+
+        } else {
+
+            const hannAndel =
+                (gruppe.hann * 100 / total).toFixed(1);
+
+            const hunnAndel =
+                (gruppe.hunn * 100 / total).toFixed(1);
+
+
+            row.innerHTML = `
+                <td>${fenotypeTekst}</td>
+                <td>${gruppe.total}</td>
+                <td>${andel} %</td>
+                <td>${gruppe.hann}</td>
+                <td>${hannAndel} %</td>
+                <td>${gruppe.hunn}</td>
+                <td>${hunnAndel} %</td>
+            `;
+        }
+
+
+        tbody.appendChild(row);
+    });
+
+
+    tabellContainer.appendChild(table);
+}
+
+document
+    .getElementById("ignorer-kjonn")
+    .addEventListener("change", function () {
+
+        visOppsummering();
+    });
