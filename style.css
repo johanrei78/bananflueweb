@@ -36,11 +36,20 @@ main {
     padding: 2rem;
 }
 
+h2 {
+    margin-top: 0;
+}
+
+img {
+    object-fit: contain;
+}
+
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
     margin: 1.5rem 0;
+    align-items: end;
 }
 
 .form-group {
@@ -92,6 +101,18 @@ input:focus-visible {
     gap: 1.5rem;
 }
 
+.parent-grid > div {
+    padding: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+.parent-grid img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 #resultat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -103,6 +124,12 @@ input:focus-visible {
     padding: 1rem;
     border: 1px solid #d1d5db;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-card .result-buttons {
+    margin-top: auto;
 }
 
 .result-card img {
@@ -162,4 +189,31 @@ input:focus-visible {
 
 #oppsummering-tabell {
     overflow-x: auto;
+}
+
+.form-group select {
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+
+    .form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+section h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#resultat-grid {
+    margin-bottom: 2rem;
 }
