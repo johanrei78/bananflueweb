@@ -874,6 +874,9 @@ function visResultater() {
         const ph =
             genotypeTilFenotype(forelder);
 
+        const fenotypeBeskrivelse =
+            `${forelder.kjonn.toLowerCase()} med ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
+        
         const altTekst = 
             lagAltTekst(ph);
         
@@ -914,6 +917,7 @@ function visResultater() {
             <button
                 type="button"
                 class="velg-tidligere-forelder"
+                aria-label="Velg til neste kryss: ${fenotypeBeskrivelse}"
             >
                 Velg til neste kryss
             </button>
