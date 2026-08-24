@@ -122,3 +122,19 @@ input:focus-visible {
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+.resultat-faner {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.resultat-fane {
+    min-height: 44px;
+}
+
+.resultat-fane.aktiv {
+    font-weight: 700;
+    border: 2px solid #111827;
+}
