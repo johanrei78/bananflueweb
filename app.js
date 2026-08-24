@@ -22,7 +22,18 @@ function visMelding(tekst, type = "info") {
     const melding =
         document.getElementById("app-melding");
 
-    melding.textContent = tekst;
+    let prefiks = "";
+
+    if (type === "suksess") {
+        prefiks = "Utført: ";
+    }
+
+    if (type === "feil") {
+        prefiks = "Kan ikke utføres: ";
+    }
+
+    melding.textContent =
+        prefiks + tekst;
 
     melding.className =
         `app-melding ${type}`;
