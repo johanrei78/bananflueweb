@@ -257,8 +257,13 @@ header h1 {
 }
 
 .app-melding {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 1000;
+
     margin-bottom: 1.5rem;
     padding: 1rem;
+
     border: 1px solid #9ca3af;
     border-radius: 8px;
     background-color: #f9fafb;
