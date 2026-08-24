@@ -723,8 +723,6 @@ function visResultater() {
             };
         }
                 
-            };
-        }
 
 
         grupper[key].total += 1;
