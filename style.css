@@ -445,3 +445,8 @@ input[type="checkbox"]:focus-visible {
     max-width: 100%;
     padding: 0.75rem 1rem;
 }
+
+.parent-grid img {
+    margin-left: auto;
+    margin-right: auto;
+}
