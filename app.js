@@ -1055,6 +1055,11 @@ function visResultater() {
             gruppe.fenotype;
 
 
+        const antenner =
+            ph.ant === "Normal"
+                ? "normale antenner"
+                : "Aristapedia-antenner";
+        
         const imageCode =
             phenotypeToImageCode(
                 ph.ant,
