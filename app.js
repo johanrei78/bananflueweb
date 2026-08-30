@@ -1095,12 +1095,10 @@ function visResultater() {
             >
 
             <p>
-                <strong>
-                    ${antenner},
-                    ${ph.oye.toLowerCase()}e øyne,
-                    ${ph.vinge.toLowerCase()}e vinger,
-                    ${ph.kropp.toLowerCase()} kropp
-                </strong>
+                ${antenner},
+                ${ph.oye.toLowerCase()}e øyne,
+                ${ph.vinge.toLowerCase()}e vinger,
+                ${ph.kropp.toLowerCase()} kropp
             </p>
 
             <p>
