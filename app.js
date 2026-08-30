@@ -101,7 +101,7 @@ function lagPForelder(ant, oye, kropp, vinge, kjonn) {
 
 
     return {
-        antenner: antenner,
+        ant
         haplotyper: haplotyper,
         oyefargeX: oyefargeX,
         kjonn: kjonn
@@ -278,7 +278,7 @@ function kryss(parent1, parent2, baseN = 150) {
 
 
         const individ = {
-            enner: antenner,
+            antenner: antenner,
             haplotyper: haplotyper,
             oyefargeX: oyefargeX,
             kjonn: kjonn
