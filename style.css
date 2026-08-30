@@ -424,9 +424,6 @@ input[type="checkbox"]:focus-visible {
     border-radius: 8px;
 }
 
-.oppsummering-valg label {
-    font-weight: 600;
-}
 
 .oppsummering-tabell th {
     font-weight: 700;
