@@ -101,7 +101,7 @@ function lagPForelder(ant, oye, kropp, vinge, kjonn) {
 
 
     return {
-        anttenner:antenner,
+        antenner:antenner,
         haplotyper: haplotyper,
         oyefargeX: oyefargeX,
         kjonn: kjonn
