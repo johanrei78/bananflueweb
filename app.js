@@ -201,15 +201,14 @@ function lagGamet(individ) {
 }
 
 
-function kryss(parent1, parent2, baseN = 1000) {
-
-    // Samme variasjon som i Python-versjonen:
-    // omtrent 1000 avkom, ±50.
+function kryss(parent1, parent2, baseN = 150) {
+    // Antall zygoter varierer tilfeldig
+    // rundt 150, med ±15.
 
     const n =
         baseN +
-        Math.floor(Math.random() * 101) -
-        50;
+        Math.floor(Math.random() * 31) -
+        15;
 
     const avkom = [];
 
@@ -749,7 +748,7 @@ document
 
 
         const avkom =
-            kryss(parent1, parent2, 1000);
+            kryss(parent1, parent2, 150);
 
 
         state.kryssNr += 1;
@@ -771,7 +770,7 @@ document
 
 
         visMelding(
-            `Krysning ${state.kryssNr} er fullført med ${avkom.length} levende avkom.`,
+            `Krysning ${state.kryssNr} er fullført.`,
             "suksess"
         );
     });
