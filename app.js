@@ -278,7 +278,7 @@ function kryss(parent1, parent2, baseN = 150) {
 
 
         const individ = {
-            enner: enner,
+            enner: antenner,
             haplotyper: haplotyper,
             oyefargeX: oyefargeX,
             kjonn: kjonn
@@ -421,6 +421,11 @@ function visForeldre() {
 
         const altTekst =
             lagAltTekst(forelder.valgtFenotype);
+
+        const antennetekst =
+            ant === "Normal"
+                ? "normale antenner"
+                : "Aristapedia-antenner";
         
         card.innerHTML = `
             <h4>Forelder ${index + 1}</h4>
@@ -432,7 +437,7 @@ function visForeldre() {
             >
 
             <p>
-                ${ant} antenner,
+                ${antennetekst},
                 ${oye.toLowerCase()}e øyne,
                 ${vinge.toLowerCase()}e vinger,
                 ${kropp.toLowerCase()} kropp
@@ -685,6 +690,11 @@ function visKrysningsforeldre() {
         const kropp = forelder.valgtFenotype.kropp;
         const vinge = forelder.valgtFenotype.vinge;
 
+        const antennetekst =
+            ant === "Normal"
+            ? "normale antenner"
+            : "Aristapedia-antenner";
+        
         const imageCode =
             phenotypeToImageCode(
                 ant,
@@ -715,7 +725,7 @@ function visKrysningsforeldre() {
             >
 
             <p>
-                ${ant} antenner,
+                ${antennetekst},
                 ${oye.toLowerCase()}e øyne,
                 ${vinge.toLowerCase()}e vinger,
                 ${kropp.toLowerCase()} kropp
