@@ -454,3 +454,6 @@ input[type="checkbox"]:focus-visible {
     font-weight: 700;
 }
 
+.oppsummering-valg label {
+    font-weight: 400;
+}
