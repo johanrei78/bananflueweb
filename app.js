@@ -961,7 +961,7 @@ function visResultater() {
         document.createElement("h3");
 
     offspringHeading.textContent =
-        "Avkom – fenotyper";
+        "Avkom";
 
     container.appendChild(offspringHeading);
     
