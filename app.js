@@ -1443,10 +1443,10 @@ function visOppsummering() {
                     <th scope="col">Fenotype</th>
                     <th scope="col">Antall</th>
                     <th scope="col">Andel</th>
-                    <th scope="col"><span class="kjonn-symbol">♂</span> Antall</th>
-                    <th scope="col"><span class="kjonn-symbol">♂</span> Andel</th>
-                    <th scope="col"><span class="kjonn-symbol">♀</span> Antall</th>
-                    <th scope="col"><span class="kjonn-symbol">♀</span> Andel</th>
+                    <th scope="col">Antall<br>hanner</th>
+                    <th scope="col">Andel<br>hanner</th>
+                    <th scope="col">Antall<br>hunner</th>
+                    <th scope="col">Andel<br>hunner</th>
                 </tr>
             </thead>
             <tbody></tbody>
