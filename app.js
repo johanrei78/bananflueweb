@@ -278,7 +278,7 @@ function kryss(parent1, parent2, baseN = 150) {
 
 
         const individ = {
-            antenner: antenner,
+            enner: enner,
             haplotyper: haplotyper,
             oyefargeX: oyefargeX,
             kjonn: kjonn
@@ -928,7 +928,7 @@ function visResultater() {
             >
 
             <p>
-                ${ph.ant} antenner,
+                ${antenner},
                 ${ph.oye.toLowerCase()}e øyne,
                 ${ph.vinge.toLowerCase()}e vinger,
                 ${ph.kropp.toLowerCase()} kropp
@@ -1068,7 +1068,7 @@ function visResultater() {
             lagAltTekst(ph);
 
         const fenotypeBeskrivelse =
-            `${ph.ant} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
+            `${antenner}, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
         
         card.innerHTML = `
             <img
@@ -1079,7 +1079,7 @@ function visResultater() {
 
             <p>
                 <strong>
-                    ${ph.ant} antenner,
+                    ${antenner},
                     ${ph.oye.toLowerCase()}e øyne,
                     ${ph.vinge.toLowerCase()}e vinger,
                     ${ph.kropp.toLowerCase()} kropp
@@ -1457,8 +1457,13 @@ function visOppsummering() {
         const ph =
             gruppe.fenotype;
 
+        const antenner =
+            ph.ant === "Normal"
+                ? "normale antenner"
+                : "Aristapedia-antenner";
+
         const fenotypeTekst =
-            `${ph.ant} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger, ${ph.kropp.toLowerCase()} kropp`;
+            `${antenner}, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger, ${ph.kropp.toLowerCase()} kropp`;
 
         const total =
             avkom.length;
