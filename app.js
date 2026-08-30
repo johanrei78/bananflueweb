@@ -378,7 +378,12 @@ function phenotypeToImageCode(ant, oye, vinge, kropp) {
 
 function lagAltTekst(ph) {
 
-    return `Bananflue: ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp.`;
+    const antenner =
+        ph.ant === "Normal"
+            ? "normale antenner"
+            : "Aristapedia-antenner";
+
+    return `Bananflue: ${antenner}, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp.`;
 }
 
 // ---------------------------------------------------------
@@ -885,8 +890,13 @@ function visResultater() {
         const ph =
             genotypeTilFenotype(forelder);
 
+        const antenner =
+            ph.ant === "Normal"
+                ? "normale antenner"
+                : "Aristapedia-antenner";
+
         const fenotypeBeskrivelse =
-            `${forelder.kjonn.toLowerCase()} med ${ph.ant.toLowerCase()} antenner, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
+            `${forelder.kjonn.toLowerCase()} med ${antenner}, ${ph.oye.toLowerCase()}e øyne, ${ph.vinge.toLowerCase()}e vinger og ${ph.kropp.toLowerCase()} kropp`;
         
         const altTekst = 
             lagAltTekst(ph);
