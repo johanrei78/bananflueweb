@@ -298,6 +298,8 @@ function kryss(parent1, parent2, baseN = 150) {
 
 function genotypeTilFenotype(geno) {
 
+    console.log("geno:", geno);
+
     // Antenner:
     // A er dominant og gir Aristapedia.
     const antenner =
