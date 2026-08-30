@@ -1213,13 +1213,8 @@ function velgTilNesteKryss(individer, kjonn) {
 
     state.nesteForeldre.push(kandidat);
 
-
-    const symbol =
-        kjonn === "Hunn" ? "♀" : "♂";
-
-
     visMelding(
-        `${kjonn} ${symbol} er valgt til neste kryss.`,
+        `${kjonn} er valgt til neste kryss.`,
         "suksess"
     );
 }
@@ -1262,13 +1257,9 @@ function velgEksisterendeForelder(forelder) {
     state.nesteForeldre.push(forelder);
 
 
-    const symbol =
-        forelder.kjonn === "Hunn"
-            ? "♀"
-            : "♂";
 
     visMelding(
-        `${forelder.kjonn} ${symbol} er valgt til neste kryss.`,
+        `${forelder.kjonn} er valgt til neste kryss.`,
         "suksess"
     );
 
