@@ -453,3 +453,8 @@ input[type="checkbox"]:focus-visible {
 .kjonn-symbol {
     font-weight: 700;
 }
+
+.kjonn-symbol {
+    font-size: 1.2em;
+    font-weight: 700;
+}
