@@ -261,6 +261,8 @@ header h1 {
     position: sticky;
     top: 0.75rem;
     z-index: 1000;
+    width: fit-content;
+    max-width: 100%;
 
     margin-bottom: 1.5rem;
     padding: 1rem;
