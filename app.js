@@ -904,7 +904,7 @@ function visResultater() {
 
         const antenner =
             ph.ant === "Normal"
-                ? "normale antenner"
+                ? "Normale antenner"
                 : "Aristapedia-antenner";
 
         const fenotypeBeskrivelse =
@@ -1059,7 +1059,7 @@ function visResultater() {
 
         const antenner =
             ph.ant === "Normal"
-                ? "normale antenner"
+                ? "Normale antenner"
                 : "Aristapedia-antenner";
         
         const imageCode =
@@ -1476,7 +1476,7 @@ function visOppsummering() {
 
         const antenner =
             ph.ant === "Normal"
-                ? "normale antenner"
+                ? "Normale antenner"
                 : "Aristapedia-antenner";
 
         const fenotypeTekst =
