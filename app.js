@@ -426,7 +426,7 @@ function visForeldre() {
 
         const antennetekst =
             ant === "Normal"
-                ? "normale antenner"
+                ? "Normale antenner"
                 : "Aristapedia-antenner";
         
         card.innerHTML = `
@@ -694,7 +694,7 @@ function visKrysningsforeldre() {
 
         const antennetekst =
             ant === "Normal"
-            ? "normale antenner"
+            ? "Normale antenner"
             : "Aristapedia-antenner";
         
         const imageCode =
