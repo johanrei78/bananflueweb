@@ -10,7 +10,7 @@ Appen lar brukeren:
 
 * velge fenotyper for fire egenskaper hos foreldre i P-generasjonen
 * velge kjønn på foreldrene
-* gjennomføre kryss med omtrent 1000 avkom
+* gjennomføre kryss med omtrent 150 avkom
 * se fordelingen av fenotyper blant avkommet
 * se antall hanner og hunner for hver fenotype
 * velge avkom som foreldre i neste kryss
@@ -51,7 +51,7 @@ P-foreldrene settes som hovedregel til homozygote genotyper for de valgte fenoty
 
 ## Simulering
 
-Hvert kryss produserer omtrent 1000 avkom, med tilfeldig variasjon på ±50 individer.
+Hvert kryss produserer omtrent 150 avkom, med tilfeldig variasjon på ±20 individer.
 
 For hvert avkom simuleres:
 
